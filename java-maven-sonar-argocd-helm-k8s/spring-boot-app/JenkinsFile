@@ -5,7 +5,7 @@ pipeline {
         stage('Build and Test') {
             agent {
                 docker {
-                    image 'maven:3.9.1-jdk-17' // Maven + Java 17
+                    image 'maven:3.9.1-eclipse-temurin-17'
                     args '--user root'
                 }
             }
@@ -20,7 +20,7 @@ pipeline {
         stage('Static Code Analysis') {
             agent {
                 docker {
-                    image 'maven:3.9.1-jdk-17' // Same Maven+Java agent
+                    image 'maven:3.9.1-eclipse-temurin-17'
                     args '--user root'
                 }
             }
