@@ -59,13 +59,8 @@ pipeline {
             }
         }
 
-        stage('Update Deployment File') {
-            agent {
-                docker {
-                    image 'docker:24.0.5-cli'
-                    args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-                }
-            }
+                stage('Update Deployment File') {
+            agent any
             environment {
                 GIT_REPO_NAME = "Jenkins-Zero-To-Hero"
                 GIT_USER_NAME = "NadeeshaMedagama"
@@ -73,7 +68,6 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                        apk add --no-cache git
                         git config user.email "abhishek.xyz@gmail.com"
                         git config user.name "Nadeesha Medagama"
                         BUILD_NUMBER=${BUILD_NUMBER}
@@ -85,5 +79,6 @@ pipeline {
                 }
             }
         }
+
     }
 }
